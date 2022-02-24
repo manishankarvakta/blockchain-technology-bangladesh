@@ -6,7 +6,7 @@ const bdcoin = new Blockchain();
 const previousBlockHash = 'WIOVJIV4F66V4ZDFBSZD3F';
 const currentBlockData = [
     {
-        amount: 10,
+        amount: 102,
         sender: 'SDGVAFDIHV55DFV23DD',
         recipient: 'SDJFODFVH4SD4CS6'
     },
@@ -22,8 +22,9 @@ const currentBlockData = [
     }
 ];
 
-const nonce = 100;
 
-const hash = bdcoin.hashBlock(previousBlockHash, currentBlockData, nonce);
+const nonce = bdcoin.proofOfWork(previousBlockHash, currentBlockData);
 
-console.log(hash);
+console.log(nonce);
+
+console.log(bdcoin.hashBlock(previousBlockHash, currentBlockData, 42066));
