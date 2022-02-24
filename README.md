@@ -8,7 +8,7 @@ Blockchain();
 Prototype Functions
 - create new block
 ```
-Blockchain.createNewBlock();
+Blockchain.createNewBlock(nonce, previousBlockHash, hash);
 ```
 - get last block
 ```
@@ -16,5 +16,5 @@ Blockchain.getLastBlock();
 ```
 - create new transaction
 ```
-Blockchain.createNewTransaction();
+Blockchain.createNewTransaction(amount, sender, recipient);
 ```
