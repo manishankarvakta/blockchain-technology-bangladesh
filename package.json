@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/manishankarvakta/blockchain-technology-bangladesh/issues"
   },
-  "homepage": "https://github.com/manishankarvakta/blockchain-technology-bangladesh#readme"
+  "homepage": "https://github.com/manishankarvakta/blockchain-technology-bangladesh#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
