@@ -18,8 +18,8 @@ app.get('/blockchain', function (req, res) {
 })
 
 app.post('/transaction', function (req, res) {
-  console.log(req.body)
-  res.send(`transaction amount ${req.body.amount} bdcoin`)
+  const blockIndex = bdcoin.createNewTransaction(req.body.amount, req.body.sender, req.body.recipient);
+  res.json({ note: `Transaction will be added in block ${blockIndex}.`});
 })
 
 
