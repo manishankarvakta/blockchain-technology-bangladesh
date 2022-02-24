@@ -26,3 +26,21 @@ Blockchain.hashBlock(previousBlockHash, currentBlockData, nonce);
 ```
 Blockchain.proofOfWork(previousBlockHash, currentBlockData);
 ```
+
+
+### Blockchain API Endpoint
+
+- BlockChain [ get ]
+```
+http://localhost:3000/blockchain
+```
+
+- Transaction [ post ]
+```
+http://localhost:3000/transaction
+```
+
+- BlockChain [ get ]
+```
+http://localhost:3000/mine
+```
