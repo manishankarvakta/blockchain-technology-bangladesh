@@ -4,5 +4,9 @@
 ### Blockchain Constructor Function
 
 ```
-Blockchain()
+Blockchain();
+```
+Prototype Functions
+```
+Blockchain.createNewBlock();
 ```
