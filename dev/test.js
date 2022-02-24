@@ -1,20 +1,29 @@
 const Blockchain = require('./blockchain');
 
 const bdcoin = new Blockchain();
-bdcoin.createNewBlock(1532,'JLDF556dvsvJ', 'KJSGDV23daAD');
 
-bdcoin.createNewTransaction(100,'MANIJLDF556dSHdJ', 'ATIQKJSGD23dDFAD');
 
-bdcoin.createNewBlock(15562,'JLDF556dSDvJ', 'KJSGDV23dSFAD');
+const previousBlockHash = 'WIOVJIV4F66V4ZDFBSZD3F';
+const currentBlockData = [
+    {
+        amount: 10,
+        sender: 'SDGVAFDIHV55DFV23DD',
+        recipient: 'SDJFODFVH4SD4CS6'
+    },
+    {
+        amount: 150,
+        sender: 'SDGVAFDIHV55DFV23DD',
+        recipient: 'SDJFODFVH4SD4CS6'
+    },
+    {
+        amount: 250,
+        sender: 'SDGVAFDIHV55DFV23DD',
+        recipient: 'SDJFODFVH4SD4CS6'
+    }
+];
 
-bdcoin.createNewTransaction(50,'MANIJLDF556dSHdJ', 'ATIQKJSGD23dDFAD');
-bdcoin.createNewTransaction(30,'MANIJLDF556dSHdJ', 'ATIQKJSGD23dDFAD');
-bdcoin.createNewTransaction(120,'MANIJLDF556dSHdJ', 'ATIQKJSGD23dDFAD');
+const nonce = 100;
 
-bdcoin.createNewBlock(23462,'JLDF556dSDDJ', 'KJSGDV2SAdSFAD');
- 
-console.log(bdcoin);
-console.log('--------');
-console.log(bdcoin.chain[1]);
-console.log('--------');
-console.log(bdcoin.chain[2]);
+const hash = bdcoin.hashBlock(previousBlockHash, currentBlockData, nonce);
+
+console.log(hash);
