@@ -5,7 +5,7 @@
 ```
 Blockchain();
 ```
-Prototype Functions
+** Prototype Functions **
 - create new block
 ```
 Blockchain.createNewBlock(nonce, previousBlockHash, hash);
