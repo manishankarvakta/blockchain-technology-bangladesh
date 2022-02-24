@@ -14,3 +14,7 @@ Blockchain.createNewBlock();
 ```
 Blockchain.getLastBlock();
 ```
+- create new transaction
+```
+Blockchain.createNewTransaction();
+```
