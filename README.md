@@ -18,3 +18,7 @@ Blockchain.getLastBlock();
 ```
 Blockchain.createNewTransaction(amount, sender, recipient);
 ```
+- create new hash block
+```
+Blockchain.hashBlock(previousBlockHash, currentBlockData, nonce);
+```

@@ -19,5 +19,8 @@
   "homepage": "https://github.com/manishankarvakta/blockchain-technology-bangladesh#readme",
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "sha256": "^0.2.0"
   }
 }
