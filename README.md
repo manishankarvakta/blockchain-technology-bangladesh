@@ -18,6 +18,11 @@ Blockchain.getLastBlock();
 ```
 Blockchain.createNewTransaction(amount, sender, recipient);
 ```
+- add Transaction To Pending Transactions
+```
+Blockchain.addTransactionToPendingTransactions(transaction);
+```
+
 - hash block
 ```
 Blockchain.hashBlock(previousBlockHash, currentBlockData, nonce);
