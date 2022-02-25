@@ -45,7 +45,7 @@ app.get('/mine', function (req, res) {
   res.json({
     note: "New block mined Successfully",
     block: newBlock
-  })
+  }) 
 })
 
 
@@ -67,7 +67,7 @@ app.post('/register-and-broadcast-node', function(req, res){
   Promise.all(regNodesPromises)
   .then(data => {
     const bulkRegisterOptions = {
-      uri: newNodeUrl+'register-node-bulk',
+      uri: newNodeUrl + '/register-node-bulk',
       method: 'POST',
       body: {allNetworkNodes: [...bdcoin.networkNodes, bdcoin.currentNodeUrl] },
       json: true
@@ -77,6 +77,7 @@ app.post('/register-and-broadcast-node', function(req, res){
   .then(data => {
     res.json({ note: 'New Node registered with network successfully'})
   })
+  
 });
 
 
@@ -87,7 +88,7 @@ app.post('/register-node', function(req, res){
   if(nodeAllreadyPresent && notCurrentNode) bdcoin.networkNodes.push(newNodeUrl);
   res.json({note: "New node register successfully"});
 
-});
+}); 
 
 app.post('/register-node-bulk', function(req, res){
   const allNetworkNodes = req.body.allNetworkNodes;
