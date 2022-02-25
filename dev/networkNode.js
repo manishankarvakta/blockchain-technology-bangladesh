@@ -55,7 +55,7 @@ app.post('/register-and-broadcast-node', function(req, res){
   
   const regNodesPromises = [];
   
-  bdcoin.networkNodes.forEach(networkNodeUrl =>{
+  bdcoin.networkNodes.forEach(networkNodeUrl =>{ 
     const requestOptions = {
       uri: networkNodeUrl + '/register-node',
       method: 'POST',
@@ -81,6 +81,11 @@ app.post('/register-and-broadcast-node', function(req, res){
 
 
 app.post('/register-node', function(req, res){
+  const newNodeUrl = req.body.newNodeUrl;
+  const nodeAllreadyPresent = bdcoin.networkNodes.indexOf(newNodeUrl) == -1;
+  const notCurrentNode = bdcoin.currentNodeUrl !== newNodeUrl;
+  if(nodeAllreadyPresent && notCurrentNode) bdcoin.networkNodes.push(newNodeUrl);
+  res.json({note: "New node register successfully"});
 
 });
 
