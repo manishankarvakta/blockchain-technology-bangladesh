@@ -90,7 +90,13 @@ app.post('/register-node', function(req, res){
 });
 
 app.post('/register-node-bulk', function(req, res){
-
+  const allNetworkNodes = req.body.allNetworkNodes;
+  allNetworkNodes.forEach(networkNodeUrl =>{
+    const nodeNotAlreadyPresent = bdcoin.networkNodes.indexOf(networkNodeUrl) == -1;
+    const notCurrentNode = bdcoin.currentNodeUrl !== networkNodeUrl;
+    if(nodeNotAlreadyPresent && notCurrentNode) bdcoin.networkNodes.push(networkNodeUrl);
+  })
+  res.json({note: "Bulk Registration Successfully"})
 });
 
 app.listen(port, function(){
