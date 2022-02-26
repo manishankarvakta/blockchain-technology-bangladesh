@@ -18,16 +18,40 @@ app.get('/', function (req, res) {
   res.send('BTB')
 })
 
+// get entaire blockchain
 app.get('/blockchain', function (req, res) {
   res.send(bdcoin);
 })
 
+// create new transaction
 app.post('/transaction', function (req, res) {
   const blockIndex = bdcoin.createNewTransaction(req.body.amount, req.body.sender, req.body.recipient);
   res.json({ note: `Transaction will be added in block ${blockIndex}.`});
 })
 
+// transaction broadcast
+app.post('/transaction/broadcast', function (req, res) {
+  const newTransaction = bdcoin.createNewTransaction(req.body.amount, req.body.sender, req.body.recipient);
+  bdcoin.addTransactionToPendingTransactions(newTransaction);
 
+  const regPromises = [];
+  bdcoin.networkNodes.forEach(networkNodeUrl => {
+    const requestOptions = {
+      uri: networkNodeUrl + '/transaction',
+      method: 'POST',
+      body: newTransaction,
+      json: true
+    };
+
+    requestPromises.push(rp(requestOptions));
+  });
+  Promise.all(regPromises)
+  .then(data => {
+    res.json({ note: "Transaction Created and Broadcast Successfully." });
+  })
+});
+
+// mine new block
 app.get('/mine', function (req, res) {
   const lastBlock = bdcoin.getLastBlock();
   const previousBlockHash =  lastBlock['hash'];
@@ -48,7 +72,7 @@ app.get('/mine', function (req, res) {
   }) 
 })
 
-
+// register node to network
 app.post('/register-and-broadcast-node', function(req, res){
   const newNodeUrl = req.body.newNodeUrl;
   if(bdcoin.networkNodes.indexOf(newNodeUrl) == -1) bdcoin.networkNodes.push(newNodeUrl);
