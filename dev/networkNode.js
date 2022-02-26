@@ -25,8 +25,9 @@ app.get('/blockchain', function (req, res) {
 
 // create new transaction
 app.post('/transaction', function (req, res) {
-  const blockIndex = bdcoin.createNewTransaction(req.body.amount, req.body.sender, req.body.recipient);
-  res.json({ note: `Transaction will be added in block ${blockIndex}.`});
+  const newTransaction = req.body;
+  const blockIndex = bdcoin.addTransactionToPendingTransactions(newTransaction);
+  res.json({ note: `Transaction will be added in block ${blockIndex}`});
 })
 
 // transaction broadcast
