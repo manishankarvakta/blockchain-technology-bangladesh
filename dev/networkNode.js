@@ -229,12 +229,17 @@ app.get('/block/:blockHash', function(req, res){
   const correctBlock = bdcoin.getBlock(blockHash);
   res.json({
     block: correctBlock
-  })
-})
+  });
+});
 
 // get block by transactionId
 app.get('/transaction/:transactionId', function(req, res){
-
+  const transactionId = req.params.transactionId;
+  const transctionData = bdcoin.getTransaction(transactionId);
+  res.json({
+    transaction: transctionData.transaction,
+    block: transctionData.block
+  })
 })
 
 // get address
