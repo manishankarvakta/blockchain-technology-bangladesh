@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', function (req, res) {
   res.send('BTB')
-})
+})  
 
 // get entaire blockchain
 app.get('/blockchain', function (req, res) {
@@ -176,6 +176,51 @@ app.post('/register-node-bulk', function(req, res){
     if(nodeNotAlreadyPresent && notCurrentNode) bdcoin.networkNodes.push(networkNodeUrl);
   })
   res.json({note: "Bulk Registration Successfully"})
+});
+
+
+// consesus
+app.get('/consensus', function(req, res) {
+  const requestPromises = [];
+  bdcoin.networkNodes.forEach(networkNodeUrl => {
+    const requestOptions = {
+      uri: networkNodeUrl + '/blockchain',
+      method: 'GET',
+      json: true
+    };
+    requestPromises.push(rp(requestOptions));
+  });
+
+  Promise.all(requestPromises)
+  .then(blockchaines => {
+      const currentChaineLength = bdcoin.chain.length;
+      let maxChainLength = currentChaineLength;
+      let newLongestChain = null;
+      let newPendingTransactions = null;
+
+      blockchaines.forEach(blockchain => {
+        if(blockchain.chain.length > maxChainLength){
+          maxChainLength = blockchain.chain.length;
+          newLongestChain = blockchain.chain;
+          newPendingTransactions = blockchain.pendingTransaction;
+        }
+      });
+      
+      if(!newLongestChain || (newLongestChain && !bdcoin.chainIsValid(newLongestChain))){
+        res.json({
+          note: 'Current chain is UptoDate.',
+          chain: bdcoin.chain
+        })
+      }
+      else if (newLongestChain && bdcoin.chainIsValid(newLongestChain)){
+        bdcoin.chain = newLongestChain;
+        bdcoin.pendingTransaction = newPendingTransactions;
+        res.json({
+          note: 'This Chain has been Updated.',
+          chain: bdcoin.chain
+        })
+      }
+  })
 });
 
 app.listen(port, function(){
