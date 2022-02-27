@@ -244,7 +244,12 @@ app.get('/transaction/:transactionId', function(req, res){
 
 // get address
 app.get('/address/:address',function(req, res){
+  const address = req.params.address;
+  const addressData = bdcoin.getAdressData(address);
 
+  res.json({
+    addressData: addressData
+  })
 })
 
 app.listen(port, function(){
