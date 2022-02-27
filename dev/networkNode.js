@@ -225,7 +225,11 @@ app.get('/consensus', function(req, res) {
 
 // get block by hash
 app.get('/block/:blockHash', function(req, res){
-
+  const blockHash = req.params.blockHash;
+  const correctBlock = bdcoin.getBlock(blockHash);
+  res.json({
+    block: correctBlock
+  })
 })
 
 // get block by transactionId
