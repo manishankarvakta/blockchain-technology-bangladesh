@@ -212,7 +212,7 @@ app.get('/consensus', function(req, res) {
           chain: bdcoin.chain
         })
       }
-      else if (newLongestChain && bdcoin.chainIsValid(newLongestChain)){
+      else{
         bdcoin.chain = newLongestChain;
         bdcoin.pendingTransaction = newPendingTransactions;
         res.json({
@@ -222,6 +222,21 @@ app.get('/consensus', function(req, res) {
       }
   })
 });
+
+// get block by hash
+app.get('/block/:blockHash', function(req, res){
+
+})
+
+// get block by transactionId
+app.get('/transaction/:transactionId', function(req, res){
+
+})
+
+// get address
+app.get('/address/:address',function(req, res){
+
+})
 
 app.listen(port, function(){
   console.log(`Listening on: http://localhost:${port}`)
