@@ -37,7 +37,7 @@ Blockchain.prototype.createNewTransaction = function (amount, sender, recipient)
         amount: amount,
         sender: sender,
         recipient: recipient,
-        transactionId: uuid.vi().split('-').join('')
+        transactionId: uuid.v1().split('-').join('')
     }
 
     return newTransaction;
@@ -48,7 +48,7 @@ Blockchain.prototype.addTransactionToPendingTransactions = function(transactionO
     this.pendingTransaction.push(transactionObj);
     return this.getLastBlock()['index'] + 1;
 }
-
+ 
 Blockchain.prototype.hashBlock = function(previousBlockHash, currentBlockData, nonce){
     const dataAsString = previousBlockHash + nonce.toString() + JSON.stringify(currentBlockData);
     const hash = sha256(dataAsString);
@@ -64,7 +64,8 @@ Blockchain.prototype.proofOfWork = function(previousBlockHash, currentBlockData)
         hash = this.hashBlock(previousBlockHash, currentBlockData, nonce);
         console.log(hash);
     }
-
+    
+    console.log(nonce);
     return nonce;
 }
 
